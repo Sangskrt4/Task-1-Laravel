@@ -21,3 +21,6 @@ Route::get('/keahlian', [PortfolioController::class, 'keahlian']);
 
 // RUTE TASK 5 (Modul 5) - Nilai Mahasiswa
 Route::get('/nilai/{mahasiswaId}', [NilaiController::class, 'showNilaiMahasiswa'])->name('tampilnilai');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
