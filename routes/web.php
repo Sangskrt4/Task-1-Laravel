@@ -3,24 +3,46 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GreetingsController;
 use App\Http\Controllers\PortfolioController;
-use App\Http\Controllers\NilaiController; // Tambahan buat Task 5
+use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\HomeController;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// Halaman Utama
 Route::get('/', function () {
     return view('welcome');
 });
 
-// RUTE TASK 2 (Modul 2)
+// ==================== TASK 2 (Rute & Controller) ====================
 Route::get('/selamat-datang', [GreetingsController::class, 'welcome']);
 Route::get('/greet/{nama}/{npm}', [GreetingsController::class, 'greet']);
 
-// RUTE TASK 3 (Modul 3)
-Route::get('/home', [PortfolioController::class, 'home']);
+
+// ==================== TASK 3 (Portofolio) ====================
+Route::get('/home-porto', [PortfolioController::class, 'home'])->name('home.porto');
 Route::get('/profil', [PortfolioController::class, 'profil']);
 Route::get('/pendidikan', [PortfolioController::class, 'pendidikan']);
 Route::get('/keahlian', [PortfolioController::class, 'keahlian']);
 
-// RUTE TASK 5 (Modul 5) - Nilai Mahasiswa
+
+// ==================== TASK 5 (Nilai Mahasiswa) ====================
 Route::get('/nilai/{mahasiswaId}', [NilaiController::class, 'showNilaiMahasiswa'])->name('tampilnilai');
+
+
+// ==================== TASK 6 & 7 (Auth + Middleware) ====================
+// Auth bawaan Laravel (Login, Register, Logout, Lupa Password)
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route Home setelah Login (dashboard auth)
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Rute yang dilindungi Middleware Cek Usia (Task 7)
+Route::middleware(['auth', 'cek.usia'])->group(function () {
+    Route::get('/halaman-dewasa', function () {
+        return view('dewasa');
+    })->name('dewasa');
+});

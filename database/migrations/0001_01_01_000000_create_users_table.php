@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            
+            // ========== TAMBAHAN TASK 7 ==========
+            $table->integer('usia')->default(0);        // Kolom usia
+            $table->enum('role', ['admin', 'owner', 'user'])->default('user'); // Kolom role
+            // ======================================
+
             $table->rememberToken();
             $table->timestamps();
         });

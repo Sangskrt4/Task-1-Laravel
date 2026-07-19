@@ -61,6 +61,22 @@
                             </div>
                         </div>
 
+                        <!-- ====== TAMBAHAN INPUT USIA ====== -->
+                        <div class="row mb-3">
+                            <label for="usia" class="col-md-4 col-form-label text-md-end">{{ __('Usia') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="usia" type="number" class="form-control @error('usia') is-invalid @enderror" name="usia" value="{{ old('usia') }}" required autocomplete="usia">
+
+                                @error('usia')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <!-- ================================= -->
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
