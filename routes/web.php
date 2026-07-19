@@ -6,6 +6,7 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\ScanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,3 +35,7 @@ Route::middleware(['auth', 'cek.usia'])->group(function () {
 Route::get('/upload', [FileUploadController::class, 'index'])->name('upload.index');
 Route::post('/upload', [FileUploadController::class, 'store'])->name('upload.store');
 Route::delete('/upload/{filename}', [FileUploadController::class, 'destroy'])->name('upload.destroy');
+
+// ==================== TASK 9: SCAN QR & PRODUK ====================
+Route::get('/scan-data-produk', [ScanController::class, 'index']);
+Route::post('/scan-produk', [ScanController::class, 'processScanProduk']);
